@@ -1,11 +1,16 @@
-import React from "react";
-import ReactDom from "react";
 import Modal from "react-modal";
+import { ImageModalProps } from "../../types";
 import css from "./ImageModal.module.css";
+
 Modal.setAppElement("#root");
 
-export default function ImageModal({ isOpen, closeModal, image }) {
+export default function ImageModal({
+  isOpen,
+  closeModal,
+  image,
+}: ImageModalProps) {
   if (!image) return null;
+
   return (
     <Modal
       isOpen={isOpen}
@@ -19,16 +24,14 @@ export default function ImageModal({ isOpen, closeModal, image }) {
       <img
         className={css.image}
         src={image.urls.regular}
-        alt={image.description}
+        alt={image.description || "Image description not available"}
       />
-
       <p className={css.text}>
         <strong>Author:</strong> {image.user.name}
       </p>
       <p className={css.text}>
         <strong>Likes:</strong> {image.likes}
       </p>
-      {/* <button className={css.closeBtn} onClick={closeModal}></button> */}
     </Modal>
   );
 }
